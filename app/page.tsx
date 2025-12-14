@@ -122,7 +122,7 @@ export default function Home() {
               <div>
                 <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
                   Movie Explorer
-                </h1>
+          </h1>
                 <p className="mt-2 text-gray-600 dark:text-gray-400">
                   {isAuthenticated ? `Welcome back, ${user?.name}!` : 'Discover and save your favorite movies'}
                 </p>
@@ -146,7 +146,7 @@ export default function Home() {
                 <Link
                   href="/login"
                   className="rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105 hover:shadow-xl"
-                >
+            >
                   Login / Register
                 </Link>
               )}
