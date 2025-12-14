@@ -7,6 +7,8 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('query');
   const movieId = searchParams.get('id');
+  const category = searchParams.get('category'); // popular, top_rated, now_playing, upcoming
+  const page = searchParams.get('page') || '1';
 
   if (!TMDB_API_KEY) {
     return NextResponse.json(
@@ -23,10 +25,13 @@ export async function GET(request: NextRequest) {
       url = `${TMDB_BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}`;
     } else if (query) {
       // Search movies
-      url = `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`;
+      url = `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&page=${page}`;
+    } else if (category) {
+      // Get movies by category
+      url = `${TMDB_BASE_URL}/movie/${category}?api_key=${TMDB_API_KEY}&page=${page}`;
     } else {
       return NextResponse.json(
-        { error: 'Missing query or id parameter' },
+        { error: 'Missing query, id, or category parameter' },
         { status: 400 }
       );
     }
